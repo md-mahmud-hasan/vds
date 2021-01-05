@@ -1,6 +1,7 @@
 package edu.scs.vds.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,6 +30,10 @@ public class User {
     String zip;
 
     String country;
+
+    @OneToOne(targetEntity=Application.class, mappedBy="user",
+            fetch=FetchType.LAZY)
+    private Application application;
 
     public Integer getId() {
         return id;
