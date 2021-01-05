@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
