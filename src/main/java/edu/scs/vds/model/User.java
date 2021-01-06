@@ -1,5 +1,7 @@
 package edu.scs.vds.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class User {
     @Column(nullable = false)
     String nid;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
     String street;

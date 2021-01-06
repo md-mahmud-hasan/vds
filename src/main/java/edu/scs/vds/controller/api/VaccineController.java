@@ -1,9 +1,11 @@
-package edu.scs.vds.controller;
+package edu.scs.vds.controller.api;
 
 import edu.scs.vds.model.Vaccine;
 import edu.scs.vds.service.VaccineService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Vaccine management"}, description = "API List")
 public class VaccineController {
 
     @Autowired
