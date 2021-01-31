@@ -11,21 +11,26 @@ import java.io.IOException;
 
 @RestController
 @ApiIgnore
-public class IndexController implements ErrorController {
+public class IndexController {
+//public class IndexController implements ErrorController {
+//
+//    @Override
+//    public String getErrorPath() {
+//        return "/error";
+//    }
+//
+//    @RequestMapping("/error")
+//    public void handleErrorWithRedirect(HttpServletResponse response) throws IOException {
+//        response.sendRedirect("/swagger-ui/");
+//    }
 
-    @Override
-    public String getErrorPath() {
-        return "/error";
-    }
-
-    @RequestMapping("/error")
-    public void handleErrorWithRedirect(HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/docs")
+    public void redirectDocs(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui/");
     }
-
     @RequestMapping(value = "/")
-    public void redirect(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/swagger-ui/");
+    public void redirectToLogin(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/login/");
     }
 
 }

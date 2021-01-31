@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Booths"}, description = "API List")
-public class BoothController {
+public class BoothApiController {
 
     @Autowired
     BoothService boothService;

@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Vaccine management"}, description = "API List")
-public class VaccineController {
+public class VaccineApiController {
 
     @Autowired
     VaccineService vaccineService;

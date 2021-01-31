@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"User management"}, description = "API List")
-public class UserController {
+public class UserApiController {
 
     @Autowired
     UserService userService;

@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 @RestController
 @EnableSwagger2
 @Api(value = "Test API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Vaccine Applications"}, description = "API List")
-public class ApplicationController {
+public class ApplicationApiController {
 
     @Autowired
     ApplicationService applicationService;

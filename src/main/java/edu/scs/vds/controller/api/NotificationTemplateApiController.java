@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Notifications"}, description = "API List")
-public class NotificationTemplateController {
+public class NotificationTemplateApiController {
 
     @Autowired
     NotificationTemplateService notificationTemplateService;

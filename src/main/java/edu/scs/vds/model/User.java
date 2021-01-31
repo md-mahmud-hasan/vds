@@ -1,9 +1,9 @@
 package edu.scs.vds.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.scs.vds.model.enums.UserRole;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,28 +11,32 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column(nullable = false)
-    String firstName;
+    private String firstName;
 
-    String lastName;
+    private String lastName;
 
-    String email;
+    private String email;
+
+    private UserRole role;
 
     @Column(nullable = false)
-    String nid;
+    private String nid;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    String password;
+    private String password;
 
-    String street;
+    private String street;
 
-    String city;
+    private String city;
 
-    String zip;
+    private String zip;
 
-    String country;
+    private String country;
+    private boolean isActive;
+
 
     @OneToOne(targetEntity=Application.class, mappedBy="user",
             fetch=FetchType.LAZY)
@@ -108,6 +112,22 @@ public class User {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Override
