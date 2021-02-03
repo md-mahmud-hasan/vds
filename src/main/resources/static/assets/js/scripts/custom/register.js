@@ -8,6 +8,10 @@ $(document).ready(function () {
         user.nid=$("#nid").val();
         user.email=$("#register-email").val();
         user.password=$("#password").val();
+        user.street = $("#street").val();
+        user.city = $("#city").val();
+        user.zip = $("#zip").val();
+        user.country = $("#country").val();
 
         $.ajax({
             data:JSON.stringify(user),
