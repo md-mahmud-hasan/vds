@@ -1,6 +1,8 @@
 package edu.scs.vds.controller.api;
 
 import edu.scs.vds.model.User;
+import edu.scs.vds.model.dto.UserDto;
+import edu.scs.vds.model.enums.UserRole;
 import edu.scs.vds.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @Api(value = "API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"User management"}, description = "API List")
+@RequestMapping("/api/v1/")
 public class UserApiController {
 
     @Autowired
@@ -34,8 +37,16 @@ public class UserApiController {
         }
     }
 
-    @PostMapping("/user")
-    public User addUser(@RequestBody User user){
+    @PostMapping(path = "/user",consumes =MediaType.APPLICATION_JSON_VALUE )
+    public User addUser(@RequestBody UserDto userDto){
+        User user = userDto.getUser();
+//        user.setFirstName(userDto.getFirstname());
+//        user.setLastName(userDto.getLastname());
+//        user.setEmail(userDto.getEmail());
+//        user.setPassword(userDto.getPassword());
+//        user.setNid(userDto.getNid());
+        user.setRole(UserRole.USER);
+        user.setActive(true);
         userService.save(user);
         return user;
     }

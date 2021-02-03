@@ -35,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             }
         } else{
             try {
-                httpServletResponse.sendRedirect("/user/home");
+                httpServletResponse.sendRedirect("/patient/home");
             } catch (IOException e) {
                 e.printStackTrace();
             }
