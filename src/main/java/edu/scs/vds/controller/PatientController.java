@@ -7,8 +7,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(path = "patient")
 public class PatientController {
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home() {
         return "patient/index";
     }
+
+    @RequestMapping(value = "/application", method = RequestMethod.GET)
+    public String application() {
+        return "patient/get-appointment";
+    }
+
+
+
 }
