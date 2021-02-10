@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,5 +31,10 @@ public class UserService {
     public void delete(Integer id) {
         repo.deleteById(id);
     }
+
+    public Optional<User> getUser(String username){
+        return repo.findByEmail(username);
+    }
+
 
 }
