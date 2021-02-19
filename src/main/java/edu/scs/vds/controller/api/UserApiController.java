@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class UserApiController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
     public List<User> list() {
@@ -40,11 +44,7 @@ public class UserApiController {
     @PostMapping(path = "/user",consumes =MediaType.APPLICATION_JSON_VALUE )
     public User addUser(@RequestBody UserDto userDto){
         User user = userDto.getUser();
-//        user.setFirstName(userDto.getFirstname());
-//        user.setLastName(userDto.getLastname());
-//        user.setEmail(userDto.getEmail());
-//        user.setPassword(userDto.getPassword());
-//        user.setNid(userDto.getNid());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(UserRole.USER);
         user.setActive(true);
         userService.save(user);
