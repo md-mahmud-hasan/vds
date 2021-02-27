@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
         lang="en"
         layout:decorate="~{patient/fragments/layout}">
 <body>
@@ -13,225 +13,302 @@
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
             <div class="content-body">
-                <form action="#">
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <ul class="timeline">
-                                    <li class="timeline-item">
-                                        <span class="timeline-point">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="timeline">
+                                <li class="timeline-item">
+                                        <span th:attr="class=${user.getAppointmentStep()>=1 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
                                             <i data-feather="map-pin"></i>
                                         </span>
-                                        <div class="timeline-event">
-                                            <div class="collapse-border" id="accordionExample0">
-                                                <div class="card">
-                                                    <div class="card-header collapsed" data-toggle="collapse" role="button" data-target="#collapse200" aria-expanded="false" aria-controls="collapse200">
-                                                        <span class="lead collapse-title text-primary"> Set Location </span>
-                                                    </div>
+                                    <div class="timeline-event">
+                                        <div class="collapse-border" id="accordionExample0">
+                                            <div class="card">
+                                                <div class="card-header collapsed" data-toggle="collapse" role="button"
+                                                     data-target="#collapse200" aria-expanded="false"
+                                                     aria-controls="collapse200">
+                                                    <span class="lead collapse-title text-primary"> Set Location </span>
+                                                </div>
 
-                                                    <div id="collapse200" class="collapse" aria-labelledby="heading200" data-parent="#accordionExample0" style="">
-                                                        <div class="card-body">
-                                                            <div class="form-group">
-                                                                <label for="basic-default-password">Vaccine Center</label>
-                                                                <div class="input-group form-password-toggle mb-2">
-                                                                    <select class="form-control" id="basicSelect">
-                                                                        <option>Frankfurt Hospital</option>
-                                                                        <option>Munchen Hospital</option>
-                                                                        <option>Hanau Hospital</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="basic-default-password">Emmergency Contact Number</label>
-                                                                <div class="input-group form-password-toggle mb-2">
-                                                                    <input type="text" class="form-control" id="basic-default-password" placeholder="Your Phone Number" aria-describedby="basic-default-password">
-                                                                </div>
+                                                <div id="collapse200" class="collapse" aria-labelledby="heading200"
+                                                     data-parent="#accordionExample0" style="">
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="basic-default-password">Vaccine Center</label>
+                                                            <div class="input-group form-password-toggle mb-2">
+                                                                <select class="form-control" id="center">
+                                                                    <option>---Please Select---</option>
+                                                                    <option th:each="booth : ${booths}" th:value="${booth.id}" th:text="${booth.name}" th:selected="${vaccineApplication.booth==booth}"></option>
+                                                                </select>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label for="basic-default-password">Emmergency Contact
+                                                                Number</label>
+                                                            <div class="input-group form-password-toggle mb-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="basic-default-password"
+                                                                       placeholder="Your Phone Number"
+                                                                       aria-describedby="basic-default-password">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="input-group form-password-toggle mb-2">
+                                                                <button class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=1 ? 'Update' : 'Next'}"></button>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-item">
-                                        <span class="timeline-point">
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                        <span th:attr="class=${user.getAppointmentStep()>=2 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
                                             <i data-feather="file-text"></i>
                                         </span>
-                                        <div class="timeline-event">
-                                            <div class="collapse-border" id="accordionExample1">
-                                                <div class="card">
-                                                    <div class="card-header collapsed" id="heading200" data-toggle="collapse" role="button" data-target="#collapse201" aria-expanded="false" aria-controls="collapse201">
-                                                        <span class="lead collapse-title text-primary"> Required Medical Report </span>
-                                                    </div>
+                                    <div class="timeline-event">
+                                        <div class="collapse-border" id="accordionExample1">
+                                            <div class="card">
+                                                <div class="card-header collapsed" data-toggle="collapse" role="button"
+                                                     data-target="#collapse201" aria-expanded="false"
+                                                     aria-controls="collapse201">
+                                                    <span class="lead collapse-title text-primary"> Required Medical Report </span>
+                                                </div>
 
-                                                    <div id="collapse201" class="collapse pb-2" aria-labelledby="heading200" data-parent="#accordionExample1" style="">
-                                                        <p class="p-1 m-0">You must have to complete these medical test to get vaccine</p>
-                                                        <ul class="pb-1">
-                                                            <li>Diagnostic 01</li>
-                                                            <li>Diagnostic 01</li>
-                                                            <li>Diagnostic 01</li>
-                                                            <li>Diagnostic 01</li>
-                                                            <li>Diagnostic 01</li>
-                                                            <li>Diagnostic 01</li>
-                                                        </ul>
-                                                        <a class="mx-2 btn btn-sm btn-primary" href="#pdf-file-link-here" download>Download list</a>
-                                                    </div>
+                                                <div id="collapse201" class="collapse pb-2" aria-labelledby="heading200"
+                                                     data-parent="#accordionExample1" style="">
+                                                    <p class="p-1 m-0">You must have to complete these medical test to
+                                                        get vaccine</p>
+                                                    <ul class="pb-1">
+                                                        <li>Diagnostic 01</li>
+                                                        <li>Diagnostic 02</li>
+                                                        <li>Diagnostic 03</li>
+                                                        <li>Diagnostic 04</li>
+                                                        <li>Diagnostic 05</li>
+                                                        <li>Diagnostic 06</li>
+                                                    </ul>
+                                                    <a class="mx-2 btn btn-sm btn-primary" href="#pdf-file-link-here"
+                                                       download>Download list</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-item">
-                                        <span class="timeline-point">
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                        <span th:attr="class=${user.getAppointmentStep()>=3 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
                                             <i data-feather="file"></i>
                                         </span>
-                                        <div class="timeline-event">
-                                            <div class="collapse-border" id="accordionExample2">
-                                                <div class="card">
-                                                    <div class="card-header collapsed" id="heading200" data-toggle="collapse" role="button" data-target="#collapse202" aria-expanded="false" aria-controls="collapse202">
-                                                        <span class="lead collapse-title text-primary"> Upload Medical Report </span>
-                                                    </div>
+                                    <div class="timeline-event">
+                                        <div class="collapse-border" id="accordionExample2">
+                                            <div class="card">
+                                                <div class="card-header collapsed" data-toggle="collapse" role="button"
+                                                     data-target="#collapse202" aria-expanded="false"
+                                                     aria-controls="collapse202">
+                                                    <span class="lead collapse-title text-primary"> Upload Medical Report </span>
+                                                </div>
 
-                                                    <div id="collapse202" class="collapse" aria-labelledby="heading200" data-parent="#accordionExample2" style="">
-                                                        <div class="form-group mx-2">
-                                                            <label for="customFile">Upload your medical report</label>
-                                                            <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="customFile">
-                                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                                            </div>
+                                                <div id="collapse202" class="collapse" aria-labelledby="heading200"
+                                                     data-parent="#accordionExample2" style="">
+                                                    <div class="form-group mx-2">
+                                                        <label for="customFile">Upload your medical report</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                   id="customFile">
+                                                            <label class="custom-file-label" for="customFile">Choose
+                                                                file</label>
                                                         </div>
                                                     </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="input-group form-password-toggle mb-2">
+                                                            <button class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=3 ? 'Update' : 'Next'}"></button>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-item">
-                                        <span class="timeline-point">
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                        <span th:attr="class=${user.getAppointmentStep()>=4 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
                                             <i data-feather="activity"></i>
                                         </span>
-                                        <div class="timeline-event">
-                                            <div class="collapse-border" id="accordionExample3">
-                                                <div class="card">
-                                                    <div class="card-header collapsed" id="heading200" data-toggle="collapse" role="button" data-target="#collapse203" aria-expanded="false" aria-controls="collapse203">
-                                                        <span class="lead collapse-title text-primary"> Recent Health Status </span>
-                                                    </div>
+                                    <div class="timeline-event">
+                                        <div class="collapse-border" id="accordionExample3">
+                                            <div class="card">
+                                                <div class="card-header collapsed" data-toggle="collapse" role="button"
+                                                     data-target="#collapse203" aria-expanded="false"
+                                                     aria-controls="collapse203">
+                                                    <span class="lead collapse-title text-primary"> Recent Health Status </span>
+                                                </div>
 
-                                                    <div id="collapse203" class="collapse" aria-labelledby="heading200" data-parent="#accordionExample3" style="">
-                                                        <div class="card-body">
-                                                            <div class="row">
+                                                <div id="collapse203" class="collapse" aria-labelledby="heading200"
+                                                     data-parent="#accordionExample3" style="">
+                                                    <div class="card-body">
+                                                        <div class="row">
 
-                                                                <div class="col-md-12">
+                                                            <div class="col-md-12">
 
-                                                                    <div class="form-group mb-4">
-                                                                        <label for="basic-default-password">History of chronic disease</label>
-                                                                        <div class="mt-1">
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="cd" id="cd1" value="yes" checked="">
-                                                                                <label class="form-check-label" for="cd1">Yes</label>
-                                                                            </div>
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="cd" id="cd2" value="no">
-                                                                                <label class="form-check-label" for="cd2">No</label>
-                                                                            </div>
-
+                                                                <div class="form-group mb-4">
+                                                                    <label for="basic-default-password">History of
+                                                                        chronic disease</label>
+                                                                    <div class="mt-1">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="cd" id="cd1" value="yes"
+                                                                                   checked="">
+                                                                            <label class="form-check-label" for="cd1">Yes</label>
                                                                         </div>
-                                                                    </div>
-
-                                                                    <div class="form-group mb-4">
-                                                                        <label for="basic-default-password">History of heart failour</label>
-                                                                        <div class="mt-1">
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="hf" id="hf" value="male" checked="">
-                                                                                <label class="form-check-label" for="hf">Yes</label>
-                                                                            </div>
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="hf" id="inlineRadio2" value="female">
-                                                                                <label class="form-check-label" for="inlineRadio2">No</label>
-                                                                            </div>
-
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="cd" id="cd2" value="no">
+                                                                            <label class="form-check-label"
+                                                                                   for="cd2">No</label>
                                                                         </div>
+
                                                                     </div>
-
-                                                                    <div class="form-group mb-4">
-                                                                        <label for="basic-default-password">Allergies</label>
-                                                                        <div class="mt-1">
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="al" id="al1" value="male" checked="">
-                                                                                <label class="form-check-label" for="al1">Yes</label>
-                                                                            </div>
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="al" id="al2" value="female">
-                                                                                <label class="form-check-label" for="al2">No</label>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group mb-4">
-                                                                        <label for="basic-default-password">History of Lung related desease</label>
-                                                                        <div class="mt-1">
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="ld" id="ld1" value="male" checked="">
-                                                                                <label class="form-check-label" for="ld1">Yes</label>
-                                                                            </div>
-                                                                            <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="radio" name="ld" id="ld2" value="female">
-                                                                                <label class="form-check-label" for="ld2">No</label>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group mb-1">
-                                                                        <label for="basic-default-password">Please specify any other desease (If any)</label>
-                                                                        <div class="mt-1">
-                                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Textarea"></textarea>
-                                                                        </div>
-                                                                    </div>
-
-
-
                                                                 </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="basic-default-password">History of heart
+                                                                        failour</label>
+                                                                    <div class="mt-1">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="hf" id="hf" value="male"
+                                                                                   checked="">
+                                                                            <label class="form-check-label"
+                                                                                   for="hf">Yes</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="hf" id="inlineRadio2"
+                                                                                   value="female">
+                                                                            <label class="form-check-label"
+                                                                                   for="inlineRadio2">No</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="basic-default-password">Allergies</label>
+                                                                    <div class="mt-1">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="al" id="al1" value="male"
+                                                                                   checked="">
+                                                                            <label class="form-check-label" for="al1">Yes</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="al" id="al2" value="female">
+                                                                            <label class="form-check-label"
+                                                                                   for="al2">No</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="basic-default-password">History of Lung
+                                                                        related desease</label>
+                                                                    <div class="mt-1">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="ld" id="ld1" value="male"
+                                                                                   checked="">
+                                                                            <label class="form-check-label" for="ld1">Yes</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                   name="ld" id="ld2" value="female">
+                                                                            <label class="form-check-label"
+                                                                                   for="ld2">No</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group mb-1">
+                                                                    <label for="basic-default-password">Please specify
+                                                                        any other desease (If any)</label>
+                                                                    <div class="mt-1">
+                                                                        <textarea class="form-control"
+                                                                                  id="exampleFormControlTextarea1"
+                                                                                  rows="3"
+                                                                                  placeholder="Textarea"></textarea>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <div class="input-group form-password-toggle mb-2">
+                                                                        <button class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=4 ? 'Update' : 'Next'}"></button>
+                                                                    </div>
+                                                                </div>
+
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-item">
-                                        <span class="timeline-point">
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                        <span th:attr="class=${user.getAppointmentStep()>=5 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
                                             <i data-feather="calendar"></i>
                                         </span>
-                                        <div class="timeline-event">
-                                            <div class="collapse-border" id="accordionExample4">
-                                                <div class="card">
-                                                    <div class="card-header collapsed" id="heading200" data-toggle="collapse" role="button" data-target="#collapse204" aria-expanded="false" aria-controls="collapse204">
-                                                        <span class="lead collapse-title text-primary"> Preferred Appointment & Schedule </span>
+                                    <div class="timeline-event">
+                                        <div class="collapse-border" id="accordionExample4">
+                                            <div class="card">
+                                                <div class="card-header collapsed" id="heading200"
+                                                     data-toggle="collapse" role="button" data-target="#collapse204"
+                                                     aria-expanded="false" aria-controls="collapse204">
+                                                    <span class="lead collapse-title text-primary"> Preferred Appointment & Schedule </span>
+                                                </div>
+
+                                                <div id="collapse204" class="collapse p-2" aria-labelledby="heading200"
+                                                     data-parent="#accordionExample4" style="">
+                                                    <div class="form-group">
+                                                        <label for="fp-default">Appointment Date</label>
+                                                        <input type="text" id="fp-default"
+                                                               class="form-control flatpickr-basic mb-2 flatpickr-input active"
+                                                               placeholder="YYYY-MM-DD" readonly="readonly">
+                                                    </div>
+                                                    <section id="pick-a-time">
+                                                        <label for="fp-default">Select Your Time</label>
+                                                        <input type="text" id="pt-default"
+                                                               class="form-control pickatime picker__input picker__input--active"
+                                                               placeholder="8:00 AM" readonly="" aria-haspopup="true"
+                                                               aria-readonly="false" aria-owns="pt-default_root">
+                                                    </section>
+                                                    <br/>
+
+                                                    <div class="form-group">
+                                                        <div class="input-group form-password-toggle mb-2">
+                                                            <button class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=5 ? 'Update' : 'Next'}"></button>
+                                                        </div>
                                                     </div>
 
-                                                    <div id="collapse204" class="collapse p-2" aria-labelledby="heading200" data-parent="#accordionExample4" style="">
-                                                        <div class="form-group">
-                                                            <label for="fp-default">Appointment Date</label>
-                                                            <input type="text" id="fp-default" class="form-control flatpickr-basic mb-2 flatpickr-input active" placeholder="YYYY-MM-DD" readonly="readonly">
-                                                        </div>
-                                                        <section id="pick-a-time">
-                                                            <label for="fp-default">Select Your Time</label>
-                                                            <input type="text" id="pt-default" class="form-control pickatime picker__input picker__input--active" placeholder="8:00 AM" readonly="" aria-haspopup="true" aria-readonly="false" aria-owns="pt-default_root">
-                                                        </section>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                </div>
 
-
-
-                </form>
 
             </div>
         </div>

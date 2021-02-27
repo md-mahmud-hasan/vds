@@ -35,3 +35,7 @@
 .wizard, .tabcontrol{
     overflow: visible !important;
 }
+
+.completed-step{
+    background-color: green !important;
+}

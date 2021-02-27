@@ -21,6 +21,24 @@ public class Application {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToOne()
+    @JoinColumn(name = "booth_id", nullable = false)
+    private Booth booth;
+
+    @Column(nullable = false)
+    private String emergencyContact;
+
+    private Boolean hasChronicDisease;
+
+    private Boolean hasHeartDisease;
+
+    private Boolean hasAllergy;
+
+    private Boolean hasLungDisease;
+
+    @Column(columnDefinition = "text")
+    private String reportSummery;
+
     @Column(nullable = false )
     private ApplicationStatus status;
 
@@ -35,40 +53,6 @@ public class Application {
 
     @LastModifiedDate
     private Date lastModifiedDate;
-
-    @Override
-    public String toString() {
-        return "Application{" +
-                "id=" + id +
-                ", testReport='" + testReport + '\'' +
-                ", user=" + user +
-                ", status='" + status + '\'' +
-                ", note='" + note + '\'' +
-                ", isActive=" + isActive +
-                ", createdDate=" + createdDate +
-                ", lastModifiedDate=" + lastModifiedDate +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Application that = (Application) o;
-        return isActive == that.isActive &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(testReport, that.testReport) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(note, that.note) &&
-                Objects.equals(createdDate, that.createdDate) &&
-                Objects.equals(lastModifiedDate, that.lastModifiedDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, testReport, user, status, note, isActive, createdDate, lastModifiedDate);
-    }
 
     public Integer getId() {
         return id;
@@ -132,5 +116,94 @@ public class Application {
 
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Booth getBooth() {
+        return booth;
+    }
+
+    public void setBooth(Booth booth) {
+        this.booth = booth;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public Boolean getHasChronicDisease() {
+        return hasChronicDisease;
+    }
+
+    public void setHasChronicDisease(Boolean hasChronicDisease) {
+        this.hasChronicDisease = hasChronicDisease;
+    }
+
+    public Boolean getHasHeartDisease() {
+        return hasHeartDisease;
+    }
+
+    public void setHasHeartDisease(Boolean hasHeartDisease) {
+        this.hasHeartDisease = hasHeartDisease;
+    }
+
+    public Boolean getHasAllergy() {
+        return hasAllergy;
+    }
+
+    public void setHasAllergy(Boolean hasAllergy) {
+        this.hasAllergy = hasAllergy;
+    }
+
+    public Boolean getHasLungDisease() {
+        return hasLungDisease;
+    }
+
+    public void setHasLungDisease(Boolean hasLungDisease) {
+        this.hasLungDisease = hasLungDisease;
+    }
+
+    public String getReportSummery() {
+        return reportSummery;
+    }
+
+    public void setReportSummery(String reportSummery) {
+        this.reportSummery = reportSummery;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Application that = (Application) o;
+        return isActive == that.isActive && Objects.equals(id, that.id) && Objects.equals(testReport, that.testReport) && Objects.equals(user, that.user) && Objects.equals(booth, that.booth) && Objects.equals(emergencyContact, that.emergencyContact) && Objects.equals(hasChronicDisease, that.hasChronicDisease) && Objects.equals(hasHeartDisease, that.hasHeartDisease) && Objects.equals(hasAllergy, that.hasAllergy) && Objects.equals(hasLungDisease, that.hasLungDisease) && status == that.status && Objects.equals(note, that.note) && Objects.equals(createdDate, that.createdDate) && Objects.equals(lastModifiedDate, that.lastModifiedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, testReport, user, booth, emergencyContact, hasChronicDisease, hasHeartDisease, hasAllergy, hasLungDisease, status, note, isActive, createdDate, lastModifiedDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "id=" + id +
+                ", testReport='" + testReport + '\'' +
+                ", user=" + user +
+                ", booth=" + booth +
+                ", emergencyContact='" + emergencyContact + '\'' +
+                ", hasChronicDisease=" + hasChronicDisease +
+                ", hasHeartDisease=" + hasHeartDisease +
+                ", hasAllergy=" + hasAllergy +
+                ", hasLungDisease=" + hasLungDisease +
+                ", status=" + status +
+                ", note='" + note + '\'' +
+                ", isActive=" + isActive +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
     }
 }

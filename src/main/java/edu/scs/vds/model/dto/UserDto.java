@@ -2,6 +2,8 @@ package edu.scs.vds.model.dto;
 
 import edu.scs.vds.model.User;
 
+import java.util.Date;
+
 public class UserDto {
     Integer id;
     String firstname;
@@ -13,6 +15,7 @@ public class UserDto {
     String city;
     String zip;
     String country;
+    Date dob;
 
     public UserDto(){
     }
@@ -97,6 +100,14 @@ public class UserDto {
         this.country = country;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
     public User getUser(){
         User user = new User();
         user.setId(this.getId());
@@ -109,6 +120,7 @@ public class UserDto {
         user.setStreet(this.getStreet());
         user.setZip(this.getZip());
         user.setCountry(this.getCountry());
+        user.setDob(this.getDob());
         return user;
     }
 }

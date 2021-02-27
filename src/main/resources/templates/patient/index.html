@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
         lang="en"
         layout:decorate="~{patient/fragments/layout}">
 <body>
@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <h1 class="mb-1 text-white">Congratulations <span>John</span>,</h1>
+                                        <h1 class="mb-1 text-white">Congratulations <span th:text="${user.getFirstName()+' '+user.getLastName()}"></span>,</h1>
                                         <p class="card-text m-auto w-75">
                                             You have done your registration perfectly. Now please update your profile
                                             and

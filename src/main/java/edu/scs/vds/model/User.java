@@ -2,8 +2,12 @@ package edu.scs.vds.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.scs.vds.model.enums.UserRole;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +24,8 @@ public class User {
 
     private String email;
 
+    private Date dob;
+
     private UserRole role;
 
     @Column(nullable = false)
@@ -35,12 +41,22 @@ public class User {
     private String zip;
 
     private String country;
+
+    @Column(columnDefinition = "int(1) default 1", nullable = false)
+    private Integer appointmentStep;
+
     private boolean isActive;
 
 
     @OneToOne(targetEntity=Application.class, mappedBy="user",
-            fetch=FetchType.LAZY)
+            fetch=FetchType.LAZY, optional = false)
     private Application application;
+
+    @CreatedDate
+    private Date createdDate;
+
+    @LastModifiedDate
+    private Date lastModifiedDate;
 
     public Integer getId() {
         return id;
@@ -130,33 +146,20 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", nid='" + nid + '\'' +
-                ", password='" + password + '\'' +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", zip='" + zip + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+    public Integer getAppointmentStep() {
+        return appointmentStep;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(nid, user.nid) && Objects.equals(password, user.password) && Objects.equals(street, user.street) && Objects.equals(city, user.city) && Objects.equals(zip, user.zip) && Objects.equals(country, user.country);
+    public void setAppointmentStep(Integer appointmentStep) {
+        this.appointmentStep = appointmentStep;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, nid, password, street, city, zip, country);
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
     }
 
     public String getCountry() {
@@ -165,5 +168,64 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return isActive == user.isActive && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(dob, user.dob) && role == user.role && Objects.equals(nid, user.nid) && Objects.equals(password, user.password) && Objects.equals(street, user.street) && Objects.equals(city, user.city) && Objects.equals(zip, user.zip) && Objects.equals(country, user.country) && Objects.equals(appointmentStep, user.appointmentStep) && Objects.equals(createdDate, user.createdDate) && Objects.equals(lastModifiedDate, user.lastModifiedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, dob, role, nid, password, street, city, zip, country, appointmentStep, isActive, createdDate, lastModifiedDate);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                ", role=" + role +
+                ", nid='" + nid + '\'' +
+                ", password='" + password + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", zip='" + zip + '\'' +
+                ", country='" + country + '\'' +
+                ", appointmentStep=" + appointmentStep +
+                ", isActive=" + isActive +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
     }
 }

@@ -46,6 +46,7 @@ public class UserApiController {
         User user = userDto.getUser();
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(UserRole.USER);
+        user.setAppointmentStep(0);
         user.setActive(true);
         userService.save(user);
         return user;
