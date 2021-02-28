@@ -2,7 +2,10 @@ package edu.scs.vds.controller.api;
 
 import edu.scs.vds.model.Application;
 import edu.scs.vds.model.User;
+import edu.scs.vds.model.dto.ApplicationDto;
+import edu.scs.vds.model.enums.ApplicationStatus;
 import edu.scs.vds.service.ApplicationService;
+import edu.scs.vds.service.BoothService;
 import edu.scs.vds.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import java.util.Optional;
 @RestController
 @EnableSwagger2
 @Api(value = "Test API Controller", produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Vaccine Applications"}, description = "API List")
+@RequestMapping("/api/v1/")
 public class ApplicationApiController {
 
     @Autowired
@@ -29,6 +33,9 @@ public class ApplicationApiController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    BoothService boothService;
 
     @GetMapping("/applications")
     public List<Application> list() {
@@ -53,6 +60,25 @@ public class ApplicationApiController {
         Application existingApplication = applicationService.getByUser(user.get());
         if(!existingApplication.equals(null))
             application.setId(existingApplication.getId());
+        applicationService.save(application);
+        return application;
+    }
+
+    @PostMapping("/apply")
+    public Application apply(@RequestBody ApplicationDto applicationDto){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        Optional<User> user = userService.getUser(userDetail.getUsername());
+        Application application = applicationService.getByUser(user.get());
+        if(application == null)
+            application = new Application();
+        application.setStatus(ApplicationStatus.NEW);
+        application.setActive(true);
+        application.setUser(user.get());
+        if (applicationDto.getStep()==1){
+            application.setEmergencyContact(applicationDto.getEmergencyContact());
+            application.setBooth(boothService.get(applicationDto.getBoothId()));
+        }
         applicationService.save(application);
         return application;
     }

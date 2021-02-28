@@ -14,8 +14,6 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private String testReport;
 
     @OneToOne()
     @JoinColumn(name = "user_id", nullable = false)
@@ -27,6 +25,8 @@ public class Application {
 
     @Column(nullable = false)
     private String emergencyContact;
+
+    private String testReport;
 
     private Boolean hasChronicDisease;
 
