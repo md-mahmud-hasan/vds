@@ -9,6 +9,8 @@ import edu.scs.vds.service.BoothService;
 import edu.scs.vds.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -99,6 +102,11 @@ public class ApplicationApiController {
     @DeleteMapping("/applications/{id}")
     public void delete(@PathVariable Integer id) {
         applicationService.delete(id);
+    }
+
+    @RequestMapping(value = "/data/applications", method = RequestMethod.POST)
+    public DataTablesOutput<Application> getUsers(@Valid @RequestBody DataTablesInput input) {
+        return applicationService.listAllDatatable(input);
     }
 
 }
