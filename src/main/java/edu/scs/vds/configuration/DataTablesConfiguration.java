@@ -5,6 +5,6 @@ import org.springframework.data.jpa.datatables.repository.DataTablesRepositoryFa
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories(repositoryFactoryBeanClass = DataTablesRepositoryFactoryBean.class)
+@EnableJpaRepositories(repositoryFactoryBeanClass = DataTablesRepositoryFactoryBean.class,basePackages = "edu.scs.vds.repository")
 public class DataTablesConfiguration {
 }

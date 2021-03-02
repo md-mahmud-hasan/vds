@@ -4,6 +4,7 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         lang="en"
         layout:decorate="~{admin/fragments/layout}">
+
 <body>
 <div layout:fragment="content">
 
@@ -15,7 +16,32 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                
+
+
+                <table id="appointment-table" class="display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Booth</th>
+                        <th>Emergency Contact</th>
+                        <th>Allergy</th>
+                        <th>Chronic Disease</th>
+                        <th>Heart Disease</th>
+                        <th>Test Report</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Booth</th>
+                        <th>Emergency Contact</th>
+                        <th>Allergy</th>
+                        <th>Chronic Disease</th>
+                        <th>Heart Disease</th>
+                        <th>Test Report</th>
+                    </tr>
+                    </tfoot>
+                </table>
 
             </div>
         </div>

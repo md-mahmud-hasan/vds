@@ -141,6 +141,13 @@
 <script src="../assets/js/scripts/pages/dashboard-ecommerce.js"></script>
 <!-- END: Page JS-->
 
+
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+<!-- #region datatables files -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!-- #endregion -->
+
 <script>
     $(window).on('load', function() {
         if (feather) {
@@ -151,6 +158,83 @@
         }
     })
 </script>
+
+<script>
+
+    $(document).ready(function() {
+
+        var table = $('#appointment-table').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            orderCellsTop: true,
+            fixedHeader: true,
+            "ajax": {
+                'contentType': 'application/json',
+                'data': function(d) {
+                    return JSON.stringify(d);
+                },
+                "url":"/api/v1/data/applications",
+                "method":"post"
+            },
+            columns : [
+                {
+                    data: 'user.firstName',
+                    searchable: true,
+                    orderable: false
+                },
+                {
+                    data:'booth.city',
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data:'emergencyContact',
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data:'hasAllergy',
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data:'hasChronicDisease',
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data:'hasHeartDisease',
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data:'testReport',
+                    searchable: true,
+                    orderable: true,
+                }
+            ],
+        } );
+
+        $('#appointment-table thead tr').clone(true).appendTo( '#appointment-table thead' );
+        $('#appointment-table thead tr:eq(1) th').each( function (i) {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+            $( 'input', this ).on( 'keyup change', function () {
+                if ( table.column(i).search() !== this.value ) {
+                    table
+                        .column(i)
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
+
+
+    })
+
+</script>
+
 </body>
 <!-- END: Body-->
 

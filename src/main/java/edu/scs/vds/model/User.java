@@ -48,9 +48,9 @@ public class User {
     private boolean isActive;
 
 
-    @OneToOne(targetEntity=Application.class, mappedBy="user",
-            fetch=FetchType.LAZY, optional = false)
-    private Application application;
+//    @OneToOne(targetEntity=Application.class, mappedBy="user",
+//            fetch=FetchType.LAZY)
+//    private Application application;
 
     @CreatedDate
     private Date createdDate;
@@ -154,13 +154,13 @@ public class User {
         this.appointmentStep = appointmentStep;
     }
 
-    public Application getApplication() {
-        return application;
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
-    }
+//    public Application getApplication() {
+//        return application;
+//    }
+//
+//    public void setApplication(Application application) {
+//        this.application = application;
+//    }
 
     public String getCountry() {
         return country;
