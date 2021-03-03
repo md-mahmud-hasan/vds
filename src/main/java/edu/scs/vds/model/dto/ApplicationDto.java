@@ -10,9 +10,7 @@ public class ApplicationDto {
 
     private Integer id;
 
-    @Column(nullable = false)
     private String testReport;
-
 
     private Integer userId;
 

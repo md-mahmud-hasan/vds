@@ -20,12 +20,13 @@ public class Application {
     private User user;
 
     @OneToOne()
-    @JoinColumn(name = "booth_id", nullable = false)
+    @JoinColumn(name = "booth_id", nullable = true)
     private Booth booth;
 
     @Column(nullable = false)
     private String emergencyContact;
 
+    @Column(nullable = true)
     private String testReport;
 
     private Boolean hasChronicDisease;
@@ -36,7 +37,7 @@ public class Application {
 
     private Boolean hasLungDisease;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "text", nullable = true)
     private String reportSummery;
 
     @Column(nullable = false )

@@ -72,15 +72,20 @@ public class ApplicationApiController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Optional<User> user = userService.getUser(userDetail.getUsername());
+        User currentUser = user.get();
         Application application = applicationService.getByUser(user.get());
         if(application == null)
             application = new Application();
         application.setStatus(ApplicationStatus.NEW);
         application.setActive(true);
-        application.setUser(user.get());
+        application.setUser(currentUser);
         if (applicationDto.getStep()==1){
             application.setEmergencyContact(applicationDto.getEmergencyContact());
             application.setBooth(boothService.get(applicationDto.getBoothId()));
+        }
+        if(currentUser.getAppointmentStep()<6){
+            currentUser.setAppointmentStep(applicationDto.getStep());
+            userService.save(currentUser);
         }
         applicationService.save(application);
         return application;
