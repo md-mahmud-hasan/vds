@@ -91,8 +91,9 @@ public class ApplicationApiController {
             application.setBooth(boothService.get(applicationDto.getBoothId()));
         } else if (applicationDto.getStep() == 2) {
             try {
-                String result = s3FileUploaderService.fileUploader(file, "pdf");
-                System.out.println(result);
+                String uploadedFileUrl = s3FileUploaderService.fileUploader(file, "pdf");
+                application.setTestReport(uploadedFileUrl);
+                System.out.println(uploadedFileUrl);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -178,6 +178,11 @@
             },
             columns : [
                 {
+                    orderable: false,
+                    className: 'select-checkbox',
+                    targets:   0
+                },
+                {
                     data: 'user.firstName',
                     searchable: true,
                     orderable: false
@@ -213,6 +218,15 @@
                     orderable: true,
                 }
             ],
+            columnDefs: [ {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0
+            } ],
+            select: {
+                style:    'os',
+                selector: 'td:first-child'
+            },
         } );
 
         $('#appointment-table thead tr').clone(true).appendTo( '#appointment-table thead' );
