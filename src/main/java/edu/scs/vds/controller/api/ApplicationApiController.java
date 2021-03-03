@@ -6,9 +6,11 @@ import edu.scs.vds.model.dto.ApplicationDto;
 import edu.scs.vds.model.enums.ApplicationStatus;
 import edu.scs.vds.service.ApplicationService;
 import edu.scs.vds.service.BoothService;
+import edu.scs.vds.service.S3FileUploaderService;
 import edu.scs.vds.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.validation.Valid;
@@ -40,6 +43,9 @@ public class ApplicationApiController {
     @Autowired
     BoothService boothService;
 
+    @Autowired
+    S3FileUploaderService s3FileUploaderService;
+
     @GetMapping("/applications")
     public List<Application> list() {
         return applicationService.listAll();
@@ -56,34 +62,42 @@ public class ApplicationApiController {
     }
 
     @PostMapping("/application")
-    public Application addApplication(@RequestBody Application application){
+    public Application addApplication(@RequestBody Application application) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Optional<User> user = userService.getUser(userDetail.getUsername());
         Application existingApplication = applicationService.getByUser(user.get());
-        if(!existingApplication.equals(null))
+        if (!existingApplication.equals(null))
             application.setId(existingApplication.getId());
         applicationService.save(application);
         return application;
     }
 
     @PostMapping("/apply")
-    public Application apply(@RequestBody ApplicationDto applicationDto){
+    public Application apply(@RequestParam("file") MultipartFile file, ApplicationDto applicationDto) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Optional<User> user = userService.getUser(userDetail.getUsername());
         User currentUser = user.get();
         Application application = applicationService.getByUser(user.get());
-        if(application == null)
+        if (application == null)
             application = new Application();
         application.setStatus(ApplicationStatus.NEW);
         application.setActive(true);
         application.setUser(currentUser);
-        if (applicationDto.getStep()==1){
+        if (applicationDto.getStep() == 1) {
             application.setEmergencyContact(applicationDto.getEmergencyContact());
             application.setBooth(boothService.get(applicationDto.getBoothId()));
+        } else if (applicationDto.getStep() == 2) {
+            try {
+                String result = s3FileUploaderService.fileUploader(file, "pdf");
+                System.out.println(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        if(currentUser.getAppointmentStep()<6){
+        if (currentUser.getAppointmentStep() < 6) {
             currentUser.setAppointmentStep(applicationDto.getStep());
             userService.save(currentUser);
         }
@@ -95,7 +109,7 @@ public class ApplicationApiController {
     public ResponseEntity<?> update(@RequestBody Application application, @PathVariable Integer id) {
         try {
             Application existingApplication = applicationService.get(id);
-            if(!existingApplication.equals(null))
+            if (!existingApplication.equals(null))
                 application.setId(existingApplication.getId());
             applicationService.save(application);
             return new ResponseEntity<>(HttpStatus.OK);
