@@ -18,8 +18,10 @@
                     <div class="card">
                         <div class="card-body">
                             <ul class="timeline">
+                                <!--STEP-1:Set location-->
                                 <li class="timeline-item">
-                                        <span th:attr="class=${user.getAppointmentStep()>=1 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
+                                        <span th:attr="class=${user.getAppointmentStep()>=1 ? 'timeline-point completed-step' : 'timeline-point'}"
+                                              class="timeline-point completed-step">
                                             <i data-feather="map-pin"></i>
                                         </span>
                                     <div class="timeline-event">
@@ -35,28 +37,35 @@
                                                      data-parent="#accordionExample0" style="">
                                                     <div class="card-body">
                                                         <div class="form-group">
-                                                            <label for="center">Vaccine Center</label>
+                                                            <label for="center">Vaccine Center <sup class="text-danger">*</sup></label>
                                                             <div class="input-group form-password-toggle mb-2">
                                                                 <select class="form-control" id="center">
-                                                                    <option>---Please Select---</option>
-                                                                    <option th:each="booth : ${booths}" th:value="${booth.id}" th:text="${booth.name}" th:selected="${vaccineApplication.booth==booth}"></option>
+                                                                    <option value="">---Please Select---</option>
+                                                                    <option th:each="booth : ${booths}"
+                                                                            th:value="${booth.id}"
+                                                                            th:text="${booth.name}"
+                                                                            th:selected="${vaccineApplication.booth==booth}"></option>
                                                                 </select>
                                                             </div>
+                                                            <span class="text-danger error-msg"></span>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="emergency-contact">Emergency Contact
-                                                                Number</label>
+                                                                Number <sup class="text-danger">*</sup></label>
                                                             <div class="input-group form-password-toggle mb-2">
                                                                 <input type="text" class="form-control"
                                                                        id="emergency-contact"
-                                                                       placeholder="Emergency Phone Number" th:value="${vaccineApplication.emergencyContact}"
+                                                                       placeholder="Emergency Phone Number"
+                                                                       th:value="${vaccineApplication.emergencyContact}"
                                                                        aria-describedby="basic-default-password">
                                                             </div>
+                                                            <span class="text-danger error-msg"></span>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <div class="input-group form-password-toggle mb-2">
-                                                                <button data-step="1" class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=1 ? 'Update' : 'Next'}"></button>
+                                                                <button data-step="1" class="btn btn-success nxt-btn"
+                                                                        th:text="${user.getAppointmentStep()>=1 ? 'Update' : 'Next'}"></button>
                                                             </div>
                                                         </div>
 
@@ -66,8 +75,11 @@
                                         </div>
                                     </div>
                                 </li>
+
+                                <!--STEP-2:Required Medical Report-->
                                 <li class="timeline-item">
-                                        <span th:attr="class=${user.getAppointmentStep()>=2 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
+                                        <span th:attr="class=${user.getAppointmentStep()>=2 ? 'timeline-point completed-step' : 'timeline-point'}"
+                                              class="timeline-point completed-step">
                                             <i data-feather="file-text"></i>
                                         </span>
                                     <div class="timeline-event">
@@ -98,8 +110,11 @@
                                         </div>
                                     </div>
                                 </li>
+
+                                <!--STEP-3:Upload Medical Report-->
                                 <li class="timeline-item">
-                                        <span th:attr="class=${user.getAppointmentStep()>=3 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
+                                        <span th:attr="class=${user.getAppointmentStep()>=3 ? 'timeline-point completed-step' : 'timeline-point'}"
+                                              class="timeline-point completed-step">
                                             <i data-feather="file"></i>
                                         </span>
                                     <div class="timeline-event">
@@ -108,25 +123,28 @@
                                                 <div class="card-header collapsed" data-toggle="collapse" role="button"
                                                      data-target="#collapse202" aria-expanded="false"
                                                      aria-controls="collapse202">
-                                                    <span class="lead collapse-title text-primary"> Upload Medical Report </span>
+                                                    <span class="lead collapse-title text-primary"> Upload Medical Report</span>
                                                 </div>
 
                                                 <div id="collapse202" class="collapse" aria-labelledby="heading200"
                                                      data-parent="#accordionExample2" style="">
                                                     <div class="form-group mx-2">
-                                                        <label for="customFile">Upload your medical report</label>
+                                                        <label for="customFile">Upload your medical report <sup
+                                                                class="text-danger">*</sup> </label>
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input"
                                                                    id="customFile">
                                                             <label class="custom-file-label" for="customFile">Choose
                                                                 file</label>
                                                         </div>
+                                                        <span class="text-danger error-msg"></span>
                                                     </div>
 
 
-                                                    <div class="form-group">
+                                                    <div class="form-group mx-2">
                                                         <div class="input-group form-password-toggle mb-2">
-                                                            <button data-step="2" class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=3 ? 'Update' : 'Next'}"></button>
+                                                            <button data-step="3" class="btn btn-success nxt-btn"
+                                                                    th:text="${user.getAppointmentStep()>=3 ? 'Update' : 'Next'}"></button>
                                                         </div>
                                                     </div>
 
@@ -135,8 +153,11 @@
                                         </div>
                                     </div>
                                 </li>
+
+                                <!--STEP-4:Recent Health Status-->
                                 <li class="timeline-item">
-                                        <span th:attr="class=${user.getAppointmentStep()>=4 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
+                                        <span th:attr="class=${user.getAppointmentStep()>=4 ? 'timeline-point completed-step' : 'timeline-point'}"
+                                              class="timeline-point completed-step">
                                             <i data-feather="activity"></i>
                                         </span>
                                     <div class="timeline-event">
@@ -157,17 +178,17 @@
 
                                                                 <div class="form-group mb-4">
                                                                     <label for="cd1">History of
-                                                                        chronic disease</label>
+                                                                        chronic disease <sup class="text-danger">*</sup></label>
                                                                     <div class="mt-1">
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="cd" id="cd1" value="yes"
+                                                                                   name="cd" id="cd1" value="1"
                                                                                    checked="">
                                                                             <label class="form-check-label" for="cd1">Yes</label>
                                                                         </div>
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="cd" id="cd2" value="no">
+                                                                                   name="cd" id="cd2" value="0">
                                                                             <label class="form-check-label"
                                                                                    for="cd2">No</label>
                                                                         </div>
@@ -177,11 +198,11 @@
 
                                                                 <div class="form-group mb-4">
                                                                     <label for="hf">History of heart
-                                                                        failour</label>
+                                                                        failure <sup class="text-danger">*</sup></label>
                                                                     <div class="mt-1">
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="hf" id="hf" value="male"
+                                                                                   name="hf" id="hf" value="1"
                                                                                    checked="">
                                                                             <label class="form-check-label"
                                                                                    for="hf">Yes</label>
@@ -189,7 +210,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="hf" id="inlineRadio2"
-                                                                                   value="female">
+                                                                                   value="0">
                                                                             <label class="form-check-label"
                                                                                    for="inlineRadio2">No</label>
                                                                         </div>
@@ -198,17 +219,17 @@
                                                                 </div>
 
                                                                 <div class="form-group mb-4">
-                                                                    <label for="al1">Allergies</label>
+                                                                    <label for="al1">Allergies <sup class="text-danger">*</sup></label>
                                                                     <div class="mt-1">
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="al" id="al1" value="male"
+                                                                                   name="al" id="al1" value="1"
                                                                                    checked="">
                                                                             <label class="form-check-label" for="al1">Yes</label>
                                                                         </div>
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="al" id="al2" value="female">
+                                                                                   name="al" id="al2" value="0">
                                                                             <label class="form-check-label"
                                                                                    for="al2">No</label>
                                                                         </div>
@@ -218,17 +239,19 @@
 
                                                                 <div class="form-group mb-4">
                                                                     <label for="ld1">History of Lung
-                                                                        related desease</label>
+                                                                        related disease <sup
+                                                                                class="text-danger">*</sup></label>
                                                                     <div class="mt-1">
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="ld" id="ld1" value="male"
+                                                                                   name="ld" id="ld1" value="1"
                                                                                    checked="">
                                                                             <label class="form-check-label" for="ld1">Yes</label>
                                                                         </div>
+
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="ld" id="ld2" value="female">
+                                                                                   name="ld" id="ld2" value="0">
                                                                             <label class="form-check-label"
                                                                                    for="ld2">No</label>
                                                                         </div>
@@ -240,9 +263,8 @@
                                                                     <label for="otherDisease">Please specify
                                                                         any other disease (If any)</label>
                                                                     <div class="mt-1">
-                                                                        <textarea class="form-control"
-                                                                                  id="otherDisease"
-                                                                                  rows="3"
+                                                                        <textarea class="form-control" id="otherDisease"
+                                                                                  rows="3"  th:text="${vaccineApplication.note}"
                                                                                   placeholder="Textarea"></textarea>
                                                                     </div>
                                                                 </div>
@@ -250,7 +272,9 @@
 
                                                                 <div class="form-group">
                                                                     <div class="input-group form-password-toggle mb-2">
-                                                                        <button data-step="3" class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=4 ? 'Update' : 'Next'}"></button>
+                                                                        <button data-step="4"
+                                                                                class="btn btn-success nxt-btn"
+                                                                                th:text="${user.getAppointmentStep()>=4 ? 'Update' : 'Next'}"></button>
                                                                     </div>
                                                                 </div>
 
@@ -263,8 +287,11 @@
                                         </div>
                                     </div>
                                 </li>
+
+                                <!--STEP-5:Preferred Appointment & Schedule-->
                                 <li class="timeline-item">
-                                        <span th:attr="class=${user.getAppointmentStep()>=5 ? 'timeline-point completed-step' : 'timeline-point'}" class="timeline-point completed-step">
+                                        <span th:attr="class=${user.getAppointmentStep()>=5 ? 'timeline-point completed-step' : 'timeline-point'}"
+                                              class="timeline-point completed-step">
                                             <i data-feather="calendar"></i>
                                         </span>
                                     <div class="timeline-event">
@@ -279,23 +306,21 @@
                                                 <div id="collapse204" class="collapse p-2" aria-labelledby="heading200"
                                                      data-parent="#accordionExample4" style="">
                                                     <div class="form-group">
-                                                        <label for="fp-default">Appointment Date</label>
-                                                        <input type="text" id="fp-default"
-                                                               class="form-control flatpickr-basic mb-2 flatpickr-input active"
-                                                               placeholder="YYYY-MM-DD" readonly="readonly">
+                                                        <label for="preferred-appointment-date">Appointment Date <sup
+                                                                class="text-danger">*</sup></label>
+                                                        <div class="input-group form-password-toggle mb-2">
+                                                            <input type="date" id="preferred-appointment-date"
+                                                                   class="form-control"
+                                                                   placeholder="mm-dd-yyyy"
+                                                                   th:value="${vaccineApplication.preferredAppointmentDate}">
+                                                        </div>
+                                                        <span class="text-danger error-msg"></span>
                                                     </div>
-                                                    <section id="pick-a-time">
-                                                        <label for="fp-default">Select Your Time</label>
-                                                        <input type="text" id="pt-default"
-                                                               class="form-control pickatime picker__input picker__input--active"
-                                                               placeholder="8:00 AM" readonly="" aria-haspopup="true"
-                                                               aria-readonly="false" aria-owns="pt-default_root">
-                                                    </section>
-                                                    <br/>
 
                                                     <div class="form-group">
                                                         <div class="input-group form-password-toggle mb-2">
-                                                            <button data-step="4" class="btn btn-success nxt-btn" th:text="${user.getAppointmentStep()>=5 ? 'Update' : 'Next'}"></button>
+                                                            <button data-step="5" class="btn btn-success nxt-btn"
+                                                                    th:text="${user.getAppointmentStep()>=5 ? 'Update' : 'Next'}"></button>
                                                         </div>
                                                     </div>
 

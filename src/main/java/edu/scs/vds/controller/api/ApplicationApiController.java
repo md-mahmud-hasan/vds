@@ -74,7 +74,7 @@ public class ApplicationApiController {
     }
 
     @PostMapping("/apply")
-    public Application apply(@RequestParam("file") MultipartFile file, ApplicationDto applicationDto) {
+    public Application apply(@RequestParam(value = "file", required = false) MultipartFile file, ApplicationDto applicationDto) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
@@ -86,10 +86,18 @@ public class ApplicationApiController {
         application.setStatus(ApplicationStatus.NEW);
         application.setActive(true);
         application.setUser(currentUser);
+
         if (applicationDto.getStep() == 1) {
+            //STEP-1:Set location
             application.setEmergencyContact(applicationDto.getEmergencyContact());
             application.setBooth(boothService.get(applicationDto.getBoothId()));
-        } else if (applicationDto.getStep() == 2) {
+
+        }else if (applicationDto.getStep() == 2){
+            //STEP-2:Required Medical Report
+            //do nothing
+
+        }else if (applicationDto.getStep() == 3) {
+            //STEP-3:Upload Medical Report
             try {
                 String uploadedFileUrl = s3FileUploaderService.fileUploader(file, "pdf");
                 application.setTestReport(uploadedFileUrl);
@@ -97,8 +105,21 @@ public class ApplicationApiController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+        }else if(applicationDto.getStep()==4){
+            //STEP-4:Recent Health Status
+            application.setHasChronicDisease(applicationDto.getHasChronicDisease());
+            application.setHasHeartDisease(applicationDto.getHasHeartDisease());
+            application.setHasAllergy(applicationDto.getHasAllergy());
+            application.setHasLungDisease(applicationDto.getHasLungDisease());
+            application.setNote(applicationDto.getNote());
+
+        }else if(applicationDto.getStep()==5){
+            //STEP-5:Preferred Appointment & Schedule
+            application.setPreferredAppointmentDate(applicationDto.getPreferredAppointmentDate());
         }
-        if (currentUser.getAppointmentStep() < 6) {
+
+        if (currentUser.getAppointmentStep() < applicationDto.getStep()) {
             currentUser.setAppointmentStep(applicationDto.getStep());
             userService.save(currentUser);
         }

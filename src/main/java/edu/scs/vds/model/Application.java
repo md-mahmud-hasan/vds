@@ -49,6 +49,11 @@ public class Application {
     @Column(columnDefinition = "tinyint(1) default 1", nullable = false)
     private boolean isActive;
 
+    private  Date preferredAppointmentDate;
+    private  Date doseOneDate;
+    private  Date doseTwoDate;
+
+
     @CreatedDate
     private Date createdDate;
 
@@ -175,6 +180,30 @@ public class Application {
         this.reportSummery = reportSummery;
     }
 
+    public Date getPreferredAppointmentDate() {
+        return preferredAppointmentDate;
+    }
+
+    public void setPreferredAppointmentDate(Date preferredAppointmentDate) {
+        this.preferredAppointmentDate = preferredAppointmentDate;
+    }
+
+    public Date getDoseOneDate() {
+        return doseOneDate;
+    }
+
+    public void setDoseOneDate(Date doseOneDate) {
+        this.doseOneDate = doseOneDate;
+    }
+
+    public Date getDoseTwoDate() {
+        return doseTwoDate;
+    }
+
+    public void setDoseTwoDate(Date doseTwoDate) {
+        this.doseTwoDate = doseTwoDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -202,6 +231,7 @@ public class Application {
                 ", hasLungDisease=" + hasLungDisease +
                 ", status=" + status +
                 ", note='" + note + '\'' +
+                ", preferredAppointmentDate='" + preferredAppointmentDate + '\'' +
                 ", isActive=" + isActive +
                 ", createdDate=" + createdDate +
                 ", lastModifiedDate=" + lastModifiedDate +

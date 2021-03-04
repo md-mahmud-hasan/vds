@@ -3,8 +3,10 @@ package edu.scs.vds.model.dto;
 import edu.scs.vds.model.Booth;
 import edu.scs.vds.model.User;
 import edu.scs.vds.model.enums.ApplicationStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.Date;
 
 public class ApplicationDto {
 
@@ -29,6 +31,20 @@ public class ApplicationDto {
     private String note;
 
     private Integer step;
+
+    private Date preferredAppointmentDate;
+    private Date doseOneDate;
+    private Date doseTwoDate;
+
+//    private MultipartFile file;
+//
+//    public MultipartFile getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(MultipartFile file) {
+//        this.file = file;
+//    }
 
     public Integer getId() {
         return id;
@@ -117,4 +133,29 @@ public class ApplicationDto {
     public void setStep(Integer step) {
         this.step = step;
     }
+
+    public Date getPreferredAppointmentDate() {
+        return preferredAppointmentDate;
+    }
+
+    public void setPreferredAppointmentDate(Date preferredAppointmentDate) {
+        this.preferredAppointmentDate = preferredAppointmentDate;
+    }
+
+    public Date getDoseOneDate() {
+        return doseOneDate;
+    }
+
+    public void setDoseOneDate(Date doseOneDate) {
+        this.doseOneDate = doseOneDate;
+    }
+
+    public Date getDoseTwoDate() {
+        return doseTwoDate;
+    }
+
+    public void setDoseTwoDate(Date doseTwoDate) {
+        this.doseTwoDate = doseTwoDate;
+    }
+
 }
