@@ -3,6 +3,7 @@ package edu.scs.vds.controller.api;
 import edu.scs.vds.model.Application;
 import edu.scs.vds.model.User;
 import edu.scs.vds.model.dto.ApplicationDto;
+import edu.scs.vds.model.dto.ConfirmApplication;
 import edu.scs.vds.model.enums.ApplicationStatus;
 import edu.scs.vds.service.ApplicationService;
 import edu.scs.vds.service.BoothService;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -146,8 +150,29 @@ public class ApplicationApiController {
     }
 
     @RequestMapping(value = "/data/applications", method = RequestMethod.POST)
-    public DataTablesOutput<Application> getUsers(@Valid @RequestBody DataTablesInput input) {
+    public DataTablesOutput<Application> getApplications(@Valid @RequestBody DataTablesInput input) {
+
         return applicationService.listAllDatatable(input);
     }
+
+    @PostMapping("/confirm-application")
+    public Boolean confirmApplication(@RequestBody ConfirmApplication confirmApplication) {
+        try {
+            for (Integer id : confirmApplication.getApplicationIds()) {
+                Application application = applicationService.get(id);
+                application.setDoseOneDate(confirmApplication.getDate());
+                User user = application.getUser();
+                user.setAppointmentStep(7);
+                applicationService.save(application);
+                userService.save(user);
+            }
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+
 
 }

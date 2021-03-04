@@ -187,12 +187,12 @@
 
     $(document).ready(function () {
 
-        var table = $('#appointment-table').DataTable({
+        var appointmentDataTable = $('#appointment-table').DataTable({
             "processing": true,
             "serverSide": true,
             orderCellsTop: true,
             fixedHeader: true,
-            "bFilter": false,
+            // "bFilter": false,
             "ajax": {
                 'contentType': 'application/json',
                 'data': function (d) {
@@ -289,8 +289,9 @@
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
 
                 $('input', this).on('keyup change', function () {
-                    if (table.column(i).search() !== this.value) {
-                        table
+                    if (appointmentDataTable.column(i).search() !== this.value) {
+                        console.log(this.value);
+                        appointmentDataTable
                             .column(i)
                             .search(this.value)
                             .draw();
@@ -372,7 +373,7 @@
 
             $("input[name^='select-']").each(function () {
                 if ($(this).is(':checked')) {
-                    applicationIDs.push($(this).val());
+                    applicationIDs.push(parseInt($(this).val()));
                 }
             });
 
@@ -385,8 +386,25 @@
                 if(vaccineDate){
                     console.log(vaccineDate);
                     console.log(applicationIDs);
+                    let confirmedData = {};
+                    confirmedData.applicationDate=vaccineDate;
+                    confirmedData.applicationIds=applicationIDs;
+                    $.ajax({
+                        data:JSON.stringify(confirmedData),
+                        url:"/api/v1/confirm-application",
+                        contentType: 'application/json',
+                        method:"post",
+                        success:function (res, textStatus, xhr) {
+                            if(xhr.status==200){
 
-                    //ajax
+                            }
+                            else{
+                                alert("something wrong");
+                            }
+                        }
+
+                    });
+
                     $('#setVaccineDateModal').modal('toggle');
 
                 }else{
