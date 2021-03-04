@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             }
         } else if (roles.contains(UserRole.DOCTOR.name())){
             try {
-                httpServletResponse.sendRedirect("/admin/home");
+                httpServletResponse.sendRedirect("/doctor/home");
             } catch (IOException e) {
                 e.printStackTrace();
             }

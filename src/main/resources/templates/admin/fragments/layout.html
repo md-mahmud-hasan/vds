@@ -217,12 +217,11 @@
                     searchable: false,
                     orderable: false,
                     render: function (data, type, obj, meta) {
-                        //provide user dob
-                        return getAge('1993-10-20');
+                        return getAge(obj.user.dob);
                     }
                 },
                 {
-                    data: 'booth.city',
+                    data: 'booth.name',
                     searchable: true,
                     orderable: true,
                 },
@@ -230,6 +229,18 @@
                     data: 'emergencyContact',
                     searchable: true,
                     orderable: true,
+                },
+                {
+                    data: 'preferredAppointmentDate',
+                    searchable: true,
+                    orderable: true,
+                    render: function (data, type, obj, meta) {
+                        if(data){
+                            return format(new Date(data), 'yyyy-MM-dd');
+                        }else {
+                            return '--';
+                        }
+                    }
                 },
                 {
                     data: 'hasAllergy',
@@ -274,23 +285,55 @@
                     }
                 },
                 {
-                    data: 'testReport',
+                    data: 'hasLungDisease',
                     searchable: true,
                     orderable: true,
+                    render: function (data, type, obj, meta) {
+                        let html=obj.hasLungDisease;
+                        if(obj.hasLungDisease===true){
+                            html='<span class="badge badge-success">Yes</span>';
+                        }else{
+                            html='<span class="badge badge-danger">No</span>';
+                        }
+                        return html;
+                    }
                 }
+                // {
+                //     data: 'testReport',
+                //     searchable: true,
+                //     orderable: true,
+                // }
             ],
         });
+        $('.dataTables_filter').hide();
 
-        $('#appointment-table thead tr').clone(true).appendTo('#appointment-table thead').find('th:first-child').html('');
+        $('#appointment-table thead tr').clone(true).appendTo('#appointment-table thead').find('th').wrapInner('<td />').contents().unwrap();
+        //find('th:first-child').html('');
 
-        $('#appointment-table thead tr:eq(1) th').each(function (i, v) {
-            if (i != 0) {
+        $('#appointment-table thead tr:eq(1) td').each(function (i, v) {
+            if (i== 0 || i==2) {
+                $(this).html('');
+
+            }else if(i==6 || i==7 || i==8 || i==9){
+
+                $(this).html('<select><option value="">All</option><option value="True">Yes</option><option value="False">No</option></select></select>');
+                $('select', this).on('change', function () {
+                    if (appointmentDataTable.column(i).search() !== this.value) {
+                        appointmentDataTable
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+
+            }else{
+
                 var title = $(this).text();
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
 
                 $('input', this).on('keyup change', function () {
                     if (appointmentDataTable.column(i).search() !== this.value) {
-                        console.log(this.value);
+                        // console.log(this.value);
                         appointmentDataTable
                             .column(i)
                             .search(this.value)
@@ -396,7 +439,12 @@
                         method:"post",
                         success:function (res, textStatus, xhr) {
                             if(xhr.status==200){
+                                alert("Success");
 
+                                $('#selectAll').prop('checked', false);
+                                hideActionButtons();
+
+                                appointmentDataTable.draw();
                             }
                             else{
                                 alert("something wrong");

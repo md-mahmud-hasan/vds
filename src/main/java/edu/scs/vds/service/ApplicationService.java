@@ -50,7 +50,7 @@ public class ApplicationService {
 
         DataTablesOutput<Application> applicationDataTablesOutput = applicationDatatableRepository.findAll(input,(Specification<Application>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
-            p = cb.equal(root.get("user").get("appointmentStep"),6);
+            p = cb.equal(root.get("user").get("appointmentStep"),5);
             return p;
         });
         return applicationDataTablesOutput;

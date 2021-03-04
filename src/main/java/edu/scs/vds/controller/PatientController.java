@@ -57,12 +57,12 @@ public class PatientController {
         List<Booth> booths = boothService.listAll();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        Optional<User> user = userService.getUser(userDetail.getUsername());
-        Application application = applicationService.getByUser(user.get());
+        User user = userService.getUser(userDetail.getUsername()).get();
+        Application application = applicationService.getByUser(user);
         if (application == null)
             application = new Application();
         model.addObject("vaccineApplication",application);
-        model.addObject("user",user.get());
+        model.addObject("user",user);
         model.addObject("booths",booths);
         return model;
     }

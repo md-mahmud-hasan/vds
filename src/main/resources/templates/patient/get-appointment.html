@@ -312,7 +312,7 @@
                                                             <input type="date" id="preferred-appointment-date"
                                                                    class="form-control"
                                                                    placeholder="mm-dd-yyyy"
-                                                                   th:value="${vaccineApplication.preferredAppointmentDate}">
+                                                                   th:value="${#dates.format(vaccineApplication.preferredAppointmentDate, 'yyyy-MM-dd')}">
                                                         </div>
                                                         <span class="text-danger error-msg"></span>
                                                     </div>

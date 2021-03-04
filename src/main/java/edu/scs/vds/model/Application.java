@@ -29,13 +29,17 @@ public class Application {
     @Column(nullable = true)
     private String testReport;
 
-    private Boolean hasChronicDisease;
+    @Column(columnDefinition = "boolean default false", nullable = false)
+    private Boolean hasChronicDisease=false;
 
-    private Boolean hasHeartDisease;
+    @Column(columnDefinition = "boolean default false", nullable = false)
+    private Boolean hasHeartDisease=false;
 
-    private Boolean hasAllergy;
+    @Column(columnDefinition = "boolean default false", nullable = false)
+    private Boolean hasAllergy=false;
 
-    private Boolean hasLungDisease;
+    @Column(columnDefinition = "boolean default false", nullable = false)
+    private Boolean hasLungDisease=false;
 
     @Column(columnDefinition = "text", nullable = true)
     private String reportSummery;

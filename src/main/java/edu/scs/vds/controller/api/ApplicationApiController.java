@@ -160,7 +160,7 @@ public class ApplicationApiController {
         try {
             for (Integer id : confirmApplication.getApplicationIds()) {
                 Application application = applicationService.get(id);
-                application.setDoseOneDate(confirmApplication.getDate());
+                application.setDoseOneDate(confirmApplication.getApplicationDate());
                 User user = application.getUser();
                 user.setAppointmentStep(7);
                 applicationService.save(application);

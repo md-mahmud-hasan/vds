@@ -7,7 +7,7 @@
 <div layout:fragment="content">
 
 
-<!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -22,70 +22,88 @@
                                 <h4 class="card-title">Personal Information</h4>
                             </div>
                             <div class="card-body">
-                                    <div class="row">
+                                <div class="row">
 
-                                        <div class="col-md-6">
+                                    <div class="col-md-6">
 
-                                            <form class="auth-register-form mt-2" id="profile-form">
-                                                <div class="form-group">
-                                                    <label for="firstname" class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" th:value="${user.firstName}" id="firstname" placeholder="john" aria-describedby="firstname" tabindex="1" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="lastname" class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" id="lastname" th:value="${user.lastName}" placeholder="doe" aria-describedby="lastname" tabindex="2" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="lastname" class="form-label">Street</label>
-                                                    <input type="text" class="form-control" id="street" th:value="${user.street}" placeholder="Nibelungenpl. 1" aria-describedby="street" tabindex="2" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="city" class="form-label">City</label>
-                                                    <input type="text" class="form-control" id="city" th:value="${user.city}" placeholder="Frankfurt am Main" aria-describedby="city" tabindex="2" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="zip" class="form-label">Zip</label>
-                                                    <input type="text" class="form-control" id="zip" th:value="${user.zip}" placeholder="60318" aria-describedby="zip" tabindex="2" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="country" class="form-label">Country</label>
-                                                    <input type="text" class="form-control" id="country" th:value="${user.country}" placeholder="doe" aria-describedby="country" tabindex="2" autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nid" class="form-label">NID</label>
-                                                    <input type="text" class="form-control" id="nid" th:value="${user.nid}" placeholder="XXXXXXXXXXX" aria-describedby="nid" tabindex="3" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="form-label">Email : </label>
-                                                    <span th:text="${user.email}"></span>
-                                                </div>
+                                        <form class="auth-register-form mt-2" id="profile-form">
+                                            <div class="form-group">
+                                                <label for="firstname" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" th:value="${user.firstName}"
+                                                       id="firstname" placeholder="john" aria-describedby="firstname"
+                                                       tabindex="1" autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" id="lastname"
+                                                       th:value="${user.lastName}" placeholder="doe"
+                                                       aria-describedby="lastname" tabindex="2" autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="street" class="form-label">Street</label>
+                                                <input type="text" class="form-control" id="street"
+                                                       th:value="${user.street}" placeholder="Nibelungenpl. 1"
+                                                       aria-describedby="street" tabindex="2" autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="city" class="form-label">City</label>
+                                                <input type="text" class="form-control" id="city"
+                                                       th:value="${user.city}" placeholder="Frankfurt am Main"
+                                                       aria-describedby="city" tabindex="2" autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="zip" class="form-label">Zip</label>
+                                                <input type="text" class="form-control" id="zip" th:value="${user.zip}"
+                                                       placeholder="60318" aria-describedby="zip" tabindex="2"
+                                                       autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="country" class="form-label">Country</label>
+                                                <input type="text" class="form-control" id="country"
+                                                       th:value="${user.country}" placeholder="doe"
+                                                       aria-describedby="country" tabindex="2" autofocus/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nid" class="form-label">NID</label>
+                                                <input type="text" class="form-control" id="nid" th:value="${user.nid}"
+                                                       placeholder="XXXXXXXXXXX" aria-describedby="nid" tabindex="3"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Email : </label>
+                                                <span th:text="${user.email}"></span>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="password" class="form-label">Password</label>
+                                            <div class="form-group">
+                                                <label for="password" class="form-label">Password</label>
 
-                                                    <div class="input-group input-group-merge form-password-toggle">
-                                                        <input type="password" class="form-control form-control-merge" id="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="register-password" tabindex="5" />
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-                                                        </div>
+                                                <div class="input-group input-group-merge form-password-toggle">
+                                                    <input type="password" class="form-control form-control-merge"
+                                                           id="password"
+                                                           placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                           aria-describedby="register-password" tabindex="5"/>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text cursor-pointer"><i
+                                                                data-feather="eye"></i></span>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <button class="btn btn-primary btn-block" id="update-btn" tabindex="5">Update</button>
-                                            </form>
-
-                                        </div>
+                                            <button type="button" class="btn btn-primary btn-block" id="update-btn" tabindex="5">
+                                                Update
+                                            </button>
+                                        </form>
 
                                     </div>
+
+                                </div>
                             </div>
 
-                           
 
                         </div><!-- #End Personal Information -->
                     </section>
-                <!-- Flatpickr Ends-->
+                    <!-- Flatpickr Ends-->
 
-                <button class="btn btn-primary mb-5" type="submit">Submit</button>
+<!--                    <button class="btn btn-primary mb-5" type="submit">Submit</button>-->
 
                 </form>
 
@@ -93,7 +111,6 @@
         </div>
     </div>
     <!-- END: Content-->
-
 
 </div>
 </body>

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ConfirmApplication {
     List<Integer> applicationIds;
-    Date date;
+    Date applicationDate;
 
     public List<Integer> getApplicationIds() {
         return applicationIds;
@@ -15,11 +15,11 @@ public class ConfirmApplication {
         this.applicationIds = applicationIds;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getApplicationDate() {
+        return applicationDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
     }
 }
