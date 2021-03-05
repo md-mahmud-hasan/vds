@@ -17,7 +17,17 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
+                            <div class="alert alert-danger p-2 d-none error-div">
+                                Set Location information required
+                                <br>
+                                Upload Medical Report information required
+                                <br>
+                                Recent Health Status information required
+
+                            </div>
                             <ul class="timeline">
+                                <input type="hidden" name="user-step" id="user-step"
+                                       th:value="${user.getAppointmentStep()}">
                                 <!--STEP-1:Set location-->
                                 <li class="timeline-item">
                                         <span th:attr="class=${user.getAppointmentStep()>=1 ? 'timeline-point completed-step' : 'timeline-point'}"
@@ -183,12 +193,13 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="cd" id="cd1" value="1"
-                                                                                   checked="">
-                                                                            <label class="form-check-label" for="cd1">Yes</label>
+                                                                                   th:attr="checked=${vaccineApplication.hasChronicDisease==True ? 'true' : 'false'}">
+                                                                            <label class="form-check-label " for="cd1">Yes</label>
                                                                         </div>
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="cd" id="cd2" value="0">
+                                                                                   name="cd" id="cd2" value="0"
+                                                                                   th:attr="checked=${vaccineApplication.hasChronicDisease==False ? 'true' : 'false'}">
                                                                             <label class="form-check-label"
                                                                                    for="cd2">No</label>
                                                                         </div>
@@ -203,14 +214,15 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="hf" id="hf" value="1"
-                                                                                   checked="">
+                                                                                   th:attr="checked=${vaccineApplication.hasHeartDisease==True ? 'true' : 'false'}">
                                                                             <label class="form-check-label"
                                                                                    for="hf">Yes</label>
                                                                         </div>
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="hf" id="inlineRadio2"
-                                                                                   value="0">
+                                                                                   value="0"
+                                                                                   th:attr="checked=${vaccineApplication.hasHeartDisease==False ? 'true' : 'false'}">
                                                                             <label class="form-check-label"
                                                                                    for="inlineRadio2">No</label>
                                                                         </div>
@@ -224,12 +236,13 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="al" id="al1" value="1"
-                                                                                   checked="">
+                                                                                   th:attr="checked=${vaccineApplication.hasAllergy==True ? 'true' : 'false'}">
                                                                             <label class="form-check-label" for="al1">Yes</label>
                                                                         </div>
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="al" id="al2" value="0">
+                                                                                   name="al" id="al2" value="0"
+                                                                                   th:attr="checked=${vaccineApplication.hasAllergy==False ? 'true' : 'false'}">
                                                                             <label class="form-check-label"
                                                                                    for="al2">No</label>
                                                                         </div>
@@ -245,13 +258,14 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                    name="ld" id="ld1" value="1"
-                                                                                   checked="">
+                                                                                   th:attr="checked=${vaccineApplication.hasLungDisease==True ? 'true' : 'false'}">
                                                                             <label class="form-check-label" for="ld1">Yes</label>
                                                                         </div>
 
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
-                                                                                   name="ld" id="ld2" value="0">
+                                                                                   name="ld" id="ld2" value="0"
+                                                                                   th:attr="checked=${vaccineApplication.hasLungDisease==False ? 'true' : 'false'}">
                                                                             <label class="form-check-label"
                                                                                    for="ld2">No</label>
                                                                         </div>
@@ -264,7 +278,8 @@
                                                                         any other disease (If any)</label>
                                                                     <div class="mt-1">
                                                                         <textarea class="form-control" id="otherDisease"
-                                                                                  rows="3"  th:text="${vaccineApplication.note}"
+                                                                                  rows="3"
+                                                                                  th:text="${vaccineApplication.note}"
                                                                                   placeholder="Textarea"></textarea>
                                                                     </div>
                                                                 </div>

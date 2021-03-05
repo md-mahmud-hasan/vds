@@ -89,8 +89,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label" for="login-email">Email</label>
-<!--                                    <input value="iti@gmail.com" class="form-control" id="login-email" type="text"-->
-                                    <input value="admin@vds.com" class="form-control" id="login-email" type="text"
+                                    <input class="form-control" id="login-email" type="text"
                                            name="username" placeholder="john@example.com" aria-describedby="login-email"
                                            autofocus="" tabindex="1"/>
                                 </div>
@@ -100,8 +99,7 @@
                                             href="forgot-password.html"><small>Forgot Password?</small></a>
                                     </div>
                                     <div class="input-group input-group-merge form-password-toggle">
-<!--                                        <input value="qwerty123456" class="form-control form-control-merge"-->
-                                        <input value="123123" class="form-control form-control-merge"
+                                        <input class="form-control form-control-merge"
                                                id="login-password" type="password" name="password"
                                                placeholder="············" aria-describedby="login-password"
                                                tabindex="2"/>
@@ -128,17 +126,17 @@
                                     <td>Role</td>
                                 </tr>
                                 <tr>
-                                    <td>admin@vds.com</td>
+                                    <td><span style="cursor: pointer" class="btn-link custom-login" data-username="admin@vds.com" data-password="123123">admin@vds.com</span></td>
                                     <td>password11**</td>
                                     <td>admin</td>
                                 </tr>
                                 <tr>
-                                    <td>patient@vds.com</td>
+                                    <td><span style="cursor: pointer" class="btn-link custom-login" data-username="patient@vds.com" data-password="qwerty123456">patient@vds.com</span></td>
                                     <td>password11**</td>
                                     <td>patient</td>
                                 </tr>
                                 <tr>
-                                    <td>doctor@vds.com</td>
+                                    <td><span style="cursor: pointer" class="btn-link custom-login" data-username="doctor@vds.com" data-password="123123">doctor@vds.com</span></td>
                                     <td>password11**</td>
                                     <td>doctor</td>
                                 </tr>
@@ -189,7 +187,13 @@
                 height: 14
             });
         }
-    })
+    });
+    $('.custom-login').on('click',function (){
+
+        $('#login-email').val($(this).attr('data-username'));
+        $('#login-password').val($(this).attr('data-password'));
+
+    });
 </script>
 </body>
 <!-- END: Body-->

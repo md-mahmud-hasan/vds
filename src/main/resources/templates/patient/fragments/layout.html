@@ -90,7 +90,7 @@
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="/patient/home"><i
                     data-feather="/patient/home"></i><span class="menu-title text-truncate"
-                                                  data-i18n="Dashboards">Dashboards</span></a>
+                                                           data-i18n="Dashboards">Dashboards</span></a>
             </li>
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="/patient/profile"><i
@@ -176,40 +176,83 @@
 
     //for profile
     $("#update-btn").on("click", function (e) {
-        alert('ll');
-        e.preventDefault();
         let user = {};
         let regForm = $("#profile-form");
 
-        user.firstname = $("#firstname").val();
-        user.lastname = $("#lastname").val();
-        user.street = $("#street").val();
-        user.city = $("#city").val();
-        user.zip = $("#zip").val();
-        user.country = $("#country").val();
-        user.nid = $("#nid").val();
-        // user.email = $("#register-email").val();
-        // user.d
-        // b = $("#dob").val();
-        user.password = $("#password").val();
+        let id=$("#user-id").val();
+        let hasError = false;
+        let firstname = $("#firstname").val().replace(/\s+/g, '');
+        let lastname = $("#lastname").val().replace(/\s+/g, '');
+        let street = $("#street").val().replace(/\s+/g, '');
+        let city = $("#city").val().replace(/\s+/g, '');
+        let zip = $("#zip").val().replace(/\s+/g, '');
+        let country = $("#country").val().replace(/\s+/g, '');
+        let nid = $("#nid").val().replace(/\s+/g, '');
+        let password = $("#password").val().replace(/\s+/g, '');
 
-        // $.ajax({
-        //     data:JSON.stringify(user),
-        //     url:"/api/v1/user",
-        //     contentType: 'application/json',
-        //     method:"post",
-        //     success:function (res, textStatus, xhr) {
-        //         if(xhr.status==200){
-        //             window.location.href="/login?registration=success";
-        //         }
-        //         else{
-        //             alert("something wrong");
-        //         }
-        //     }
-        //
-        // });
+        if (firstname == '' || firstname == null) {
+            $('#firstname').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (lastname == '' || lastname == null) {
+            $('#lastname').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (street == '' || street == null) {
+            $('#street').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (city == '' || city == null) {
+            $('#city').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (zip == '' || zip == null) {
+            $('#zip').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (country == '' || country == null) {
+            $('#country').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
+        if (nid == '' || nid == null) {
+            $('#nid').parent().find('.error-msg').text('Required');
+            hasError = true;
+        }
 
-        console.log(user)
+        console.log(user);
+
+        if (hasError === false) {
+
+            user.firstname = $("#firstname").val();
+            user.lastname = $("#lastname").val();
+            user.street = $("#street").val();
+            user.city = $("#city").val();
+            user.zip = $("#zip").val();
+            user.country = $("#country").val();
+            user.nid = $("#nid").val();
+            if (password != '')
+                user.password = $("#password").val();
+
+            // alert('ajax');
+            //ajax doesnt work.. maybe path problem
+            $.ajax({
+                data:JSON.stringify(user),
+                url:"/api/v1/user/"+id,
+                contentType: 'application/json',
+                method:"put",
+                success:function (res, textStatus, xhr) {
+                    if(xhr.status==200){
+                        alert('success');
+                    }
+                    else{
+                        alert("something wrong");
+                    }
+                }
+
+            });
+        }
+
+
     });
 
 </script>
