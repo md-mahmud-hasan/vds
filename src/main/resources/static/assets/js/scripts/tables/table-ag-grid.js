@@ -17,7 +17,6 @@ $(function () {
       field: 'firstname',
       editable: true,
       sortable: true,
-      filter: true,
       width: 175,
       filter: true,
       checkboxSelection: true,

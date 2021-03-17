@@ -46,11 +46,11 @@ public class ApplicationService {
         repo.deleteById(id);
     }
 
-    public DataTablesOutput<Application> listAllDatatable(DataTablesInput input){
+    public DataTablesOutput<Application> listAllDatatable(DataTablesInput input, Integer stepNo){
 
         DataTablesOutput<Application> applicationDataTablesOutput = applicationDatatableRepository.findAll(input,(Specification<Application>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
-            p = cb.equal(root.get("user").get("appointmentStep"),5);
+            p = cb.equal(root.get("user").get("appointmentStep"),stepNo);
             return p;
         });
         return applicationDataTablesOutput;

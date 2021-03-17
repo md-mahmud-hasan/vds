@@ -151,8 +151,14 @@ public class ApplicationApiController {
 
     @RequestMapping(value = "/data/applications", method = RequestMethod.POST)
     public DataTablesOutput<Application> getApplications(@Valid @RequestBody DataTablesInput input) {
+        Integer appointmentStep = 5;
+        return applicationService.listAllDatatable(input,appointmentStep);
+    }
 
-        return applicationService.listAllDatatable(input);
+    @RequestMapping(value = "/data/confirmed-applications", method = RequestMethod.POST)
+    public DataTablesOutput<Application> getConfirmedApplications(@Valid @RequestBody DataTablesInput input) {
+        Integer appointmentStep = 7;
+        return applicationService.listAllDatatable(input,appointmentStep);
     }
 
     @PostMapping("/confirm-application")
@@ -162,7 +168,7 @@ public class ApplicationApiController {
                 Application application = applicationService.get(id);
                 application.setDoseOneDate(confirmApplication.getApplicationDate());
                 User user = application.getUser();
-                user.setAppointmentStep(7);
+                user.setAppointmentStep(6);
                 applicationService.save(application);
                 userService.save(user);
             }
