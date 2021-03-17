@@ -1,7 +1,8 @@
 # Vaccine Distribution System
 
 This project was developed by the following members:
-###Group R:
+
+##Group R:
 - Md Mahmud Hasan (1344192)
 - Minhajul Islam Rahid (1345612)
 - Iftekhar Hossain (1359226)   

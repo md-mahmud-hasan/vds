@@ -45,6 +45,8 @@ public class PatientController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Optional<User> user = userService.getUser(userDetail.getUsername());
+        Application application = applicationService.getByUser(user.get());
+        model.addObject("vaccineApplication",application);
         model.addObject("user",user.get());
         return model;
     }
